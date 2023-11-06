@@ -5,6 +5,8 @@ import openpyxl
 from datetime import datetime
 
 
+
+transcripts_folder_path = os.getcwd()+'/raw_transcripts/'
 # box location on my mac /Users/mahdijafari/Library/CloudStorage/Box-Box
 
 
@@ -28,10 +30,10 @@ def find_doc_files_in_current_folder() -> list:
     Returns:
         list: list of the files name as str
     """
-    current_folder = os.getcwd()
+
     doc_files = []
 
-    for filename in os.listdir(current_folder):
+    for filename in os.listdir(transcripts_folder_path):
         if filename.endswith(".docx"):
             doc_files.append(filename)
 
@@ -46,7 +48,7 @@ def find_speaker_change(file_name : str) -> list:
     discussions = []
     current_discussion = ""
     
-    doc = Document(file_name)
+    doc = Document(transcripts_folder_path+file_name)
     # Define a regular expression pattern to match speaker lines
     speaker_pattern = re.compile(r'\d{2}:\d{2}:\d{2} Speaker \d')
 
